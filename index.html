@@ -154,49 +154,6 @@
   </style>
 </head>
 <body>
-<div id="saved-section" class="doctor-section">
-  <h2> الملازم التي تم تحميلها</h2>
-  <ul id="saved-list">
-    <li>لا توجد ملازم محفوظة حالياً</li>
-  </ul>
-</div>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const links = document.querySelectorAll('.doctor-section ul li a');
-  const savedList = document.getElementById('saved-list');
-
-  // جلب الملازم المحفوظة من Local Storage
-  let saved = JSON.parse(localStorage.getItem('savedFiles')) || [];
-
-  // دالة لعرض الملازم المحفوظة
-  function displaySaved() {
-    savedList.innerHTML = '';
-    if(saved.length === 0) {
-      savedList.innerHTML = '<li>لا توجد ملازم محفوظة حالياً</li>';
-      return;
-    }
-    saved.forEach(file => {
-      savedList.innerHTML += `<li><a href="${file.url}" target="_blank">${file.name}</a></li>`;
-    });
-  }
-
-  displaySaved();
-
-  // عند الضغط على أي رابط ملزمة، حفظها
-  links.forEach(link => {
-    link.addEventListener('click', () => {
-      const file = { name: link.textContent.trim(), url: link.href };
-      // منع التكرار
-      if(!saved.some(f => f.url === file.url)) {
-        saved.push(file);
-        localStorage.setItem('savedFiles', JSON.stringify(saved));
-        displaySaved();
-      }
-    });
-  });
-});
-</script>
-
 
   <header>📘 مركز تحميل الملازم   </header>
 
@@ -257,11 +214,54 @@ document.addEventListener('DOMContentLoaded', () => {
       </ul>
     </div>
   </main>
+  <div id="saved-section" class="doctor-section">
+  <h2> الملازم التي تم تحميلها</h2>
+  <ul id="saved-list">
+    <li>لا توجد ملازم محفوظة حالياً</li>
+  </ul>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const links = document.querySelectorAll('.doctor-section ul li a');
+  const savedList = document.getElementById('saved-list');
+
+  // جلب الملازم المحفوظة من Local Storage
+  let saved = JSON.parse(localStorage.getItem('savedFiles')) || [];
+
+  // دالة لعرض الملازم المحفوظة
+  function displaySaved() {
+    savedList.innerHTML = '';
+    if(saved.length === 0) {
+      savedList.innerHTML = '<li>لا توجد ملازم محفوظة حالياً</li>';
+      return;
+    }
+    saved.forEach(file => {
+      savedList.innerHTML += `<li><a href="${file.url}" target="_blank">${file.name}</a></li>`;
+    });
+  }
+
+  displaySaved();
+
+  // عند الضغط على أي رابط ملزمة، حفظها
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      const file = { name: link.textContent.trim(), url: link.href };
+      // منع التكرار
+      if(!saved.some(f => f.url === file.url)) {
+        saved.push(file);
+        localStorage.setItem('savedFiles', JSON.stringify(saved));
+        displaySaved();
+      }
+    });
+  });
+});
+</script>
 
   <footer>© 2025 مركز تحميل الملازم - إنشاء عبدالله السناني & حسين ناصر- جميع الحقوق محفوظة</footer>
 
 </body>
 </html>
+
 
 
 

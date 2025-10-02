@@ -3,6 +3,51 @@ const urlsToCache = [
   "/",             // الصفحة الرئيسية
   "/index.html"    // ملف موقعك (غيرها إذا اسمه مختلف)
   const CACHE_NAME = "malazem-cache-v1";
+// ← هنا ضع الكود اللي أرسلته
+const CACHE_NAME = "malazem-cache-v1";
+
+const urlsToCache = [
+  "index.html",
+  "sw.js",
+  "lecture_one_week_one.pdf",
+  "leture2.pdf",
+  "leture3.pdf",
+  "Statistics_and_Probability_053030.pdf",
+  "LEC1_DEF_COM_ARC.pdf",
+  "LEC2_IAS_COMPUTER_component.pdf",
+  "LEC3_COMPUTER_FUNCT.pdf",
+  "HTML.pdf",
+  "Logic_Design_Introduction.pdf",
+  "Boolean_AlgebreLecture_2.pdf",
+  "lecture1_103636.pdf",
+  "Lecture1_Physics_Course.pdf"
+];
+
+// تثبيت Service Worker وتخزين الملفات في الكاش
+self.addEventListener("install", (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache))
+  );
+});
+
+// التعامل مع الطلبات أثناء Offline
+self.addEventListener("fetch", (event) => {
+  event.respondWith(
+    caches.match(event.request).then((response) => response || fetch(event.request))
+  );
+});
+
+// حذف الكاش القديم عند التحديث
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    caches.keys().then((cacheNames) =>
+      Promise.all(cacheNames.map((name) => {
+        if (name !== CACHE_NAME) return caches.delete(name);
+      }))
+    )
+  );
+});
+
 const BASE = "/-/"; // غيّر repo-name باسم مستودعك على GitHub
 
 const urlsToCache = [

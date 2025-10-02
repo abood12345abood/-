@@ -1,6 +1,6 @@
-const CACHE_NAME = "malazem-cache-v2";
+const CACHE_NAME = "malazem-cache-v3";
 
-// ضع كل ملفات الملازم هنا بالضبط كما هي في المستودع
+// كل الملفات التي تريد تخزينها أوفلاين
 const urlsToCache = [
   "index.html",
   "sw.js",
@@ -20,24 +20,24 @@ const urlsToCache = [
   "LEC5_INTERNAL_memory.pdf",
   "LEC6_AL_UNIT_CU.pdf",
   "LEC7_IO_Device.pdf"
-  // أضف أي ملفات ملازم جديدة بنفس الطريقة هنا
 ];
 
-// 🌙 تثبيت Service Worker وتخزين الملفات في الكاش
+// تثبيت Service Worker وتخزين الملفات
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache))
   );
 });
 
-// 🌙 التعامل مع الطلبات أثناء Offline + حل مشكلة PDF على الموبايل
+// التعامل مع الطلبات أثناء Offline + PDF يعمل على الموبايل
 self.addEventListener("fetch", (event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {
       if (response) {
-        // لو الملف PDF، نعيده كـ Blob لتعمل على الموبايل
         if (event.request.url.endsWith(".pdf")) {
-          return response.blob().then((blob) => new Response(blob, { headers: { "Content-Type": "application/pdf" } }));
+          return response.blob().then(blob =>
+            new Response(blob, { headers: { "Content-Type": "application/pdf" } })
+          );
         }
         return response;
       }
@@ -46,7 +46,7 @@ self.addEventListener("fetch", (event) => {
   );
 });
 
-// 🌙 حذف الكاش القديم عند التحديث تلقائيًا
+// حذف الكاش القديم عند التحديث
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) =>

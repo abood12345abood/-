@@ -377,7 +377,14 @@ document.addEventListener('DOMContentLoaded', () => {
 });
   
 </script>
- 
+ <script>
+   if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js")
+    .then(() => console.log("✅ Service Worker مسجل بنجاح"))
+    .catch((err) => console.log("❌ فشل التسجيل:", err));
+}
+
+ </script>
 
   <footer>© 2025 مركز تحميل الملازم - إنشاء عبدالله السناني & حسين ناصر- جميع الحقوق محفوظة</footer>
 <!-- عنصر الإشعار -->
@@ -385,6 +392,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
+
 
 
 

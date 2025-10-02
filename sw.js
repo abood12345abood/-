@@ -1,11 +1,6 @@
-const CACHE_NAME = "malazem-cache-v1";
-const urlsToCache = [
-  "/",             // الصفحة الرئيسية
-  "/index.html"    // ملف موقعك (غيرها إذا اسمه مختلف)
-  const CACHE_NAME = "malazem-cache-v1";
-// ← هنا ضع الكود اللي أرسلته
-const CACHE_NAME = "malazem-cache-v1";
+const CACHE_NAME = "malazem-cache-v2";
 
+// ضع كل ملفات الملازم هنا بالضبط كما هي في المستودع
 const urlsToCache = [
   "index.html",
   "sw.js",
@@ -20,78 +15,46 @@ const urlsToCache = [
   "Logic_Design_Introduction.pdf",
   "Boolean_AlgebreLecture_2.pdf",
   "lecture1_103636.pdf",
-  "Lecture1_Physics_Course.pdf"
+  "Lecture1_Physics_Course.pdf",
+  "LEC4_COM_MEM_SYS.pdf",
+  "LEC5_INTERNAL_memory.pdf",
+  "LEC6_AL_UNIT_CU.pdf",
+  "LEC7_IO_Device.pdf"
+  // أضف أي ملفات ملازم جديدة بنفس الطريقة هنا
 ];
 
-// تثبيت Service Worker وتخزين الملفات في الكاش
+// 🌙 تثبيت Service Worker وتخزين الملفات في الكاش
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache))
   );
 });
 
-// التعامل مع الطلبات أثناء Offline
+// 🌙 التعامل مع الطلبات أثناء Offline + حل مشكلة PDF على الموبايل
 self.addEventListener("fetch", (event) => {
   event.respondWith(
-    caches.match(event.request).then((response) => response || fetch(event.request))
+    caches.match(event.request).then((response) => {
+      if (response) {
+        // لو الملف PDF، نعيده كـ Blob لتعمل على الموبايل
+        if (event.request.url.endsWith(".pdf")) {
+          return response.blob().then((blob) => new Response(blob, { headers: { "Content-Type": "application/pdf" } }));
+        }
+        return response;
+      }
+      return fetch(event.request);
+    })
   );
 });
 
-// حذف الكاش القديم عند التحديث
+// 🌙 حذف الكاش القديم عند التحديث تلقائيًا
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) =>
-      Promise.all(cacheNames.map((name) => {
-        if (name !== CACHE_NAME) return caches.delete(name);
-      }))
-    )
-  );
-});
-
-const BASE = "/-/"; // غيّر repo-name باسم مستودعك على GitHub
-
-const urlsToCache = [
-  BASE + "index.html",
-  BASE + "sw.js", // اختياري لتخزين ملف SW نفسه
-  BASE + "files/Boolean_AlgebreLecture_2.pdf",
-  BASE + "files/HTML.pdf",
-  BASE + "files/LEC1_DEF_COM_ARC.pdf",
-  BASE + "files/LEC2_IAS_COMPUTER_component.pdf",
-  BASE + "files/leture2.pdf",
-  BASE + "files/letur3.pdf",
-  BASE + "files/LEC3_COMPUTER_FUNCT.pdff",
-  BASE + "files/LEC4_COM_MEM_SYS.pdf",
-  BASE + "files/LEC5_INTERNAL_memory.pdf",
-  BASE + "files/LEC6_AL_UNIT_CU.pdf",
-  BASE + "files/LEC7_IO_Device.pdf",
-  BASE + "files/Lecture1_Physics_Course.pdf",
-  BASE + "files/Logic_Design_Introduction.pdf",
-  BASE + "files/Statistics_and_Probability_053030.pdf",
-  BASE + "files/lecture1_103636.pdf",
-  BASE + "files/lecture_one_week_one.pdf",
-  // أضف كل ملفات الملازم هنا بنفس الطريقة
-];
-
-];
-
-self.addEventListener("install", (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache))
-  );
-});
-
-self.addEventListener("fetch", (event) => {
-  event.respondWith(
-    caches.match(event.request).then((response) => response || fetch(event.request))
-  );
-});
-
-self.addEventListener("activate", (event) => {
-  event.waitUntil(
-    caches.keys().then((cacheNames) =>
-      Promise.all(cacheNames.map((name) => {
-        if (name !== CACHE_NAME) return caches.delete(name);
-      }))
+      Promise.all(
+        cacheNames.map((name) => {
+          if (name !== CACHE_NAME) return caches.delete(name);
+        })
+      )
     )
   );
 });

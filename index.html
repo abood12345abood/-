@@ -188,7 +188,27 @@
         font-size: 14px;
       }
     }
-    
+    /* CSS للإشعار */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #1e6c93;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 12px;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.5s ease;
+  z-index: 2000;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
   </style>
 </head>
 <body>
@@ -375,13 +395,39 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+  // JS لعرض الإشعار عند حفظ الملزمة
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 2000);
+}
+
+// مثال: عند الضغط على رابط ملزمة
+links.forEach(link => {
+  link.addEventListener('click', () => {
+    const file = { name: link.textContent.trim(), url: link.href };
+    if(!saved.some(f => f.url === file.url)) {
+      saved.push(file);
+      localStorage.setItem('savedFiles', JSON.stringify(saved));
+      displaySaved();
+      showToast("✅ تم إضافة الملزمة للمحفوظات");
+    } else {
+      showToast("ℹ️ الملزمة موجودة بالفعل");
+    }
+  });
+});
+
 </script>
  
 
   <footer>© 2025 مركز تحميل الملازم - إنشاء عبدالله السناني & حسين ناصر- جميع الحقوق محفوظة</footer>
+<!-- عنصر الإشعار -->
+<div id="toast" class="toast">✅ تم إضافة الملزمة للمحفوظات</div>
 
 </body>
 </html>
+
 
 
 

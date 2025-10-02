@@ -23,6 +23,11 @@
     }
 
     header {
+      <div class="controls">
+  <button id="darkModeBtn">🌙 الوضع الليلي</button>
+  <input type="text" id="searchInput" placeholder="🔍 ابحث عن ملزمة أو دكتور...">
+</div>
+
       background: linear-gradient(90deg, #1e6c93, #4dd0e1);
       color: #fff;
       padding: 30px 0;
@@ -151,6 +156,47 @@
         font-size: 14px;
       }
     }
+      .controls {
+  margin: 20px auto;
+  width: 90%;
+  max-width: 800px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+#darkModeBtn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  background: linear-gradient(90deg, #1e6c93, #4dd0e1);
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+#darkModeBtn:hover {
+  background: linear-gradient(90deg, #0d4a63, #0097a7);
+  transform: scale(1.05);
+}
+
+#searchInput {
+  flex: 1;
+  padding: 12px 18px;
+  border: 2px solid #1e6c93;
+  border-radius: 12px;
+  font-size: 16px;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+#searchInput:focus {
+  border-color: #ff4081;
+}
+
   </style>
 </head>
 <body>
@@ -271,11 +317,77 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
+  <script>
+  // 🌙 زر الوضع الليلي
+  const darkBtn = document.getElementById("darkModeBtn");
+  darkBtn.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+
+    if (document.body.classList.contains("dark-mode")) {
+      darkBtn.textContent = "☀️ الوضع النهاري";
+    } else {
+      darkBtn.textContent = "🌙 الوضع الليلي";
+    }
+  });
+
+  // 🌙 ستايل الوضع الليلي
+  const darkStyle = document.createElement("style");
+  darkStyle.innerHTML = `
+    body.dark-mode {
+      background: #121212;
+      color: #f1f1f1;
+    }
+    body.dark-mode header,
+    body.dark-mode footer {
+      background: linear-gradient(90deg, #000000, #333333);
+      color: #fff;
+    }
+    body.dark-mode .doctor-section {
+      background: #1e1e1e;
+      color: #ddd;
+      box-shadow: 0 4px 10px rgba(255,255,255,0.1);
+    }
+    body.dark-mode li {
+      background: #2a2a2a;
+      color: #eee;
+    }
+    body.dark-mode a {
+      color: #4dd0e1;
+    }
+    body.dark-mode a:hover {
+      color: #ff4081;
+    }
+    body.dark-mode #searchInput {
+      background: #2a2a2a;
+      color: white;
+      border: 2px solid #4dd0e1;
+    }
+  `;
+  document.head.appendChild(darkStyle);
+
+  // 🔍 البحث
+  const searchInput = document.getElementById("searchInput");
+  searchInput.addEventListener("keyup", () => {
+    let filter = searchInput.value.toLowerCase();
+    let sections = document.querySelectorAll(".doctor-section");
+
+    sections.forEach(sec => {
+      let text = sec.textContent.toLowerCase();
+      if (text.includes(filter)) {
+        sec.style.display = "block";
+      } else {
+        sec.style.display = "none";
+      }
+    });
+  });
+</script>
+
 
   <footer>© 2025 مركز تحميل الملازم - إنشاء عبدالله السناني & حسين ناصر- جميع الحقوق محفوظة</footer>
 
 </body>
 </html>
+
 
 
 

@@ -1,6 +1,6 @@
-const CACHE_NAME = "malazem-cache-v3";
+const CACHE_NAME = "malazem-cache-v1";
 
-// كل الملفات التي تريد تخزينها أوفلاين
+// ضع هنا كل الملفات التي تريد أن تعمل أوفلاين
 const urlsToCache = [
   "index.html",
   "sw.js",
@@ -25,23 +25,15 @@ const urlsToCache = [
 // تثبيت Service Worker وتخزين الملفات
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache))
+    caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
   );
 });
 
-// التعامل مع الطلبات أثناء Offline + PDF يعمل على الموبايل
+// التعامل مع الطلبات أثناء Offline
 self.addEventListener("fetch", (event) => {
   event.respondWith(
-    caches.match(event.request).then((response) => {
-      if (response) {
-        if (event.request.url.endsWith(".pdf")) {
-          return response.blob().then(blob =>
-            new Response(blob, { headers: { "Content-Type": "application/pdf" } })
-          );
-        }
-        return response;
-      }
-      return fetch(event.request);
+    caches.match(event.request).then(response => {
+      return response || fetch(event.request);
     })
   );
 });
@@ -49,10 +41,10 @@ self.addEventListener("fetch", (event) => {
 // حذف الكاش القديم عند التحديث
 self.addEventListener("activate", (event) => {
   event.waitUntil(
-    caches.keys().then((cacheNames) =>
+    caches.keys().then(keys =>
       Promise.all(
-        cacheNames.map((name) => {
-          if (name !== CACHE_NAME) return caches.delete(name);
+        keys.map(key => {
+          if (key !== CACHE_NAME) return caches.delete(key);
         })
       )
     )

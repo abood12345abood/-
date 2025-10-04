@@ -1,7 +1,7 @@
 {
   "name": "مركز مشاركة الملازم والملخصات",
-  "short_name": "الملازم",
-  "start_url": "/",
+  "short_name": "الملازم و الملخصات",
+  "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
@@ -18,3 +18,4 @@
     }
   ]
 }
+

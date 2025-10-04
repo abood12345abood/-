@@ -1,7 +1,7 @@
 {
   "name": "مركز مشاركة الملازم والملخصات",
   "short_name": "الملازم و الملخصات",
-  "start_url": "./index.html",
+  "start_url": "https://abood12345abood.github.io/-/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
@@ -18,5 +18,6 @@
     }
   ]
 }
+
 
 

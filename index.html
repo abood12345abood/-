@@ -69,7 +69,7 @@
     <details>
       <summary>الملازم 📚</summary>
       <ul>
-        <li><a href="Statistics_and_Probability_053030.pdf" target="_blank">(ملزمة الإحصاء)</a> <button class="download-btn" data-file="lecture_one_week_one.pdf">📥</button>
+        <li><a href="Statistics_and_Probability_053030.pdf" target="_blank">(ملزمة الإحصاء)</a><a href="lecture_one_week_one.pdf" download class="download-btn">📥</a>
       </ul>
     </details>
     <details>
@@ -259,53 +259,13 @@
         }
       });
     });
-     // تحميل الملفات مع إشعار
-document.querySelectorAll('.download-btn').forEach(btn => {
-  btn.addEventListener('click', async () => {
-    const fileUrl = btn.dataset.file;
-
-    // التأكد من أن المستخدم سمح بالإشعارات
-    if (Notification.permission !== "granted") {
-      await Notification.requestPermission();
-    }
-
-    try {
-      // تحميل الملف
-      const response = await fetch(fileUrl);
-      if (!response.ok) throw new Error('خطأ بالتحميل');
-
-      const blob = await response.blob();
-      const blobUrl = URL.createObjectURL(blob);
-
-      // إنشاء رابط تنزيل مؤقت
-      const a = document.createElement('a');
-      a.href = blobUrl;
-      a.download = fileUrl.split("/").pop();
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-
-      // إشعار بعد التحميل
-      if (Notification.permission === "granted") {
-        new Notification("تم التحميل ✅", {
-          body: `تم تحميل الملف ${fileUrl.split("/").pop()}`,
-          icon: "images/favicon-32x32.png"
-        });
-      }
-
-    } catch (err) {
-      alert("حدث خطأ أثناء التحميل!");
-      console.error(err);
-    }
-  });
-});
-
   </script>
 
   <footer> مرجع طلاب تقنية المعلومات (IT) الدفعة الثانية   - إنشاء عبدالله السناني & حسين ناصر   - جميع الحقوق محفوظة © 2025</footer>
   <script src="mobile_app_files/sw-register.js"></script>
 </body>
 </html>
+
 
 
 

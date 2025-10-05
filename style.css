@@ -239,7 +239,7 @@ summary {
 }
 
 summary::marker {
-  display: none; /* نخفي المثلث الافتراضي */
+  display: none; 
 }
 
 summary::before {

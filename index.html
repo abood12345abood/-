@@ -92,7 +92,7 @@
         <li><a href="LEC2_IAS_COMPUTER_component.pdf" target="_blank">(الملزمه 2)</a> <a href="LEC2_IAS_COMPUTER_component.pdf" download><button class="download-btn">📥</button></a></li>
         <li><a href="LEC3_COMPUTER_FUNCT.pdf" target="_blank">(الملزمه 3)</a> <a href="LEC3_COMPUTER_FUNCT.pdf" download><button class="download-btn">📥</button></a></li>
         <li><a href="LEC4_COM_MEM_SYS.pdf" target="_blank">(الملزمه 4)</a> <a href="LEC4_COM_MEM_SYS.pdf" download><button class="download-btn">📥</button></a></li>
-        <li><a href="LEC5_INTERNAL_memory.pdf" target="_blank">(الملزمه 5)</a> <button class="download-btn" data-link="LEC5_INTERNAL_memory.pdf">📥</button> 
+        <li><a href="LEC5_INTERNAL_memory.pdf" target="_blank">(الملزمه 5)<a href="LEC5_INTERNAL_memory.pdf" download><button class="download-btn">📥</button></a></li>
         <li><a href="LEC6_AL_UNIT_CU.pdf" target="_blank">(الملزمه 6)</a> <a href="LEC6_AL_UNIT_CU.pdf" download><button class="download-btn">📥</button></a></li>  
         <li><a href="LEC7_IO_Device.pdf" target="_blank">(الملزمه 7)</a> <a href="LEC7_IO_Device.pdf" download><button class="download-btn">📥</button></a></li>
       </ul>
@@ -262,37 +262,10 @@
   </script>
 
   <footer> مرجع طلاب تقنية المعلومات (IT) الدفعة الثانية   - إنشاء عبدالله السناني & حسين ناصر   - جميع الحقوق محفوظة © 2025</footer>
-<!-- إشعار التحميل -->
-<div id="downloadAlert">✅ تم تحميل الملزمة بنجاح</div>
-
-<script>
-  const alertBox = document.getElementById("downloadAlert");
-  const downloadButtons = document.querySelectorAll(".download-btn");
-
-  downloadButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      // إظهار الإشعار
-      alertBox.classList.add("show");
-      setTimeout(() => alertBox.classList.remove("show"), 3000);
-
-      // تحميل الملف مباشرة
-      const fileLink = btn.getAttribute("data-link");
-      const tempLink = document.createElement("a");
-      tempLink.href = fileLink;
-      tempLink.download = "";
-      document.body.appendChild(tempLink);
-      tempLink.click();
-      document.body.removeChild(tempLink);
-    });
-  });
-</script>
-
-
-</script>
-
   <script src="mobile_app_files/sw-register.js"></script>
 </body>
 </html>
+
 
 
 

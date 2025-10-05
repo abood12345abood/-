@@ -262,27 +262,41 @@
   </script>
 
   <footer> مرجع طلاب تقنية المعلومات (IT) الدفعة الثانية   - إنشاء عبدالله السناني & حسين ناصر   - جميع الحقوق محفوظة © 2025</footer>
-  <!-- إشعار التحميل -->
+<!-- إشعار التحميل -->
 <div id="downloadAlert">✅ تم تحميل الملزمة بنجاح</div>
 
 <script>
-  // كود الإشعار
   const alertBox = document.getElementById("downloadAlert");
   const downloadButtons = document.querySelectorAll(".download-btn");
 
   downloadButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
+    btn.addEventListener("click", (e) => {
+      // منع فتح الرابط فوراً علشان نعرض الإشعار
+      e.preventDefault();
+
+      // إظهار الإشعار
       alertBox.classList.add("show");
+
+      // إخفاء بعد 3 ثواني
       setTimeout(() => {
         alertBox.classList.remove("show");
-      }, 3000); // يختفي بعد 3 ثواني
+      }, 3000);
+
+      // تحميل الملف فعلياً بعد نصف ثانية
+      const fileLink = btn.parentElement.getAttribute("href");
+      setTimeout(() => {
+        window.open(fileLink, "_blank");
+      }, 500);
     });
   });
+</script>
+
 </script>
 
   <script src="mobile_app_files/sw-register.js"></script>
 </body>
 </html>
+
 
 
 

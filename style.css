@@ -256,8 +256,6 @@ details[open] summary::before {
   content: "-";
   color: #ff4081;
 }
-</style>
-<style>/* 🌙 الوضع الليلي */
 body.dark-mode {
   background: linear-gradient(135deg, #121212, #1e1e1e);
   color: #eee;

@@ -92,7 +92,7 @@
         <li><a href="LEC2_IAS_COMPUTER_component.pdf" target="_blank">(الملزمه 2)</a> <a href="LEC2_IAS_COMPUTER_component.pdf" download><button class="download-btn">📥</button></a></li>
         <li><a href="LEC3_COMPUTER_FUNCT.pdf" target="_blank">(الملزمه 3)</a> <a href="LEC3_COMPUTER_FUNCT.pdf" download><button class="download-btn">📥</button></a></li>
         <li><a href="LEC4_COM_MEM_SYS.pdf" target="_blank">(الملزمه 4)</a> <a href="LEC4_COM_MEM_SYS.pdf" download><button class="download-btn">📥</button></a></li>
-        <li><a href="LEC5_INTERNAL_memory.pdf" target="_blank">(الملزمه 5)</a> <a href="LEC5_INTERNAL_memory.pdf" download><button class="download-btn">📥</button></a></li>  
+        <li><a href="LEC5_INTERNAL_memory.pdf" target="_blank">(الملزمه 5)</a> <button class="download-btn" data-link="LEC5_INTERNAL_memory.pdf">📥 تحميل الملزمة</button> 
         <li><a href="LEC6_AL_UNIT_CU.pdf" target="_blank">(الملزمه 6)</a> <a href="LEC6_AL_UNIT_CU.pdf" download><button class="download-btn">📥</button></a></li>  
         <li><a href="LEC7_IO_Device.pdf" target="_blank">(الملزمه 7)</a> <a href="LEC7_IO_Device.pdf" download><button class="download-btn">📥</button></a></li>
       </ul>
@@ -270,26 +270,23 @@
   const downloadButtons = document.querySelectorAll(".download-btn");
 
   downloadButtons.forEach(btn => {
-    btn.addEventListener("click", (e) => {
-      // منع فتح الرابط فوراً علشان نعرض الإشعار
-      e.preventDefault();
-
+    btn.addEventListener("click", () => {
       // إظهار الإشعار
       alertBox.classList.add("show");
+      setTimeout(() => alertBox.classList.remove("show"), 3000);
 
-      // إخفاء بعد 3 ثواني
-      setTimeout(() => {
-        alertBox.classList.remove("show");
-      }, 3000);
-
-      // تحميل الملف فعلياً بعد نصف ثانية
-      const fileLink = btn.parentElement.getAttribute("href");
-      setTimeout(() => {
-        window.open(fileLink, "_blank");
-      }, 500);
+      // تحميل الملف مباشرة
+      const fileLink = btn.getAttribute("data-link");
+      const tempLink = document.createElement("a");
+      tempLink.href = fileLink;
+      tempLink.download = "";
+      document.body.appendChild(tempLink);
+      tempLink.click();
+      document.body.removeChild(tempLink);
     });
   });
 </script>
+
 
 </script>
 

@@ -313,23 +313,5 @@ body.dark-mode #darkModeBtn {
   background: linear-gradient(90deg, #444, #111);
   color: #fff;
 }
-#downloadAlert {
-  position: fixed;
-  top: -60px;
-  left: 0;
-  width: 100%;
-  background: linear-gradient(90deg, #2e7d32, #4caf50);
-  color: white;
-  font-size: 18px;
-  font-weight: bold;
-  text-align: center;
-  padding: 15px 0;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  z-index: 9999;
-  transition: top 0.5s ease;
-}
 
-#downloadAlert.show {
-  top: 0;
-}
 

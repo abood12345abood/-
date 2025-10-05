@@ -228,7 +228,7 @@
   </main>
 
   <script>
-    // 🌙 الوضع الليلي
+    
     const darkBtn = document.getElementById("darkModeBtn");
     darkBtn.addEventListener("click", () => {
       document.body.classList.toggle("dark-mode");
@@ -236,7 +236,7 @@
         ? "☀️ الوضع النهاري" : "🌙 الوضع الليلي";
     });
 
-    // 🔍 البحث
+
     const searchInput = document.getElementById("searchInput");
     searchInput.addEventListener("keyup", () => {
       let filter = searchInput.value.toLowerCase();
@@ -245,7 +245,7 @@
       });
     });
 
-    // زر الطي
+    
     document.querySelectorAll('.toggle-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const content = btn.nextElementSibling;
@@ -264,6 +264,7 @@
   <script src="mobile_app_files/sw-register.js"></script>
 </body>
 </html>
+
 
 
 

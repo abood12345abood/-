@@ -275,6 +275,26 @@
 
   <footer> مرجع طلاب تقنية المعلومات (IT) الدفعة الثانية   - إنشاء عبدالله السناني & حسين ناصر   - جميع الحقوق محفوظة © 2025</footer>
   <script src="mobile_app_files/sw-register.js"></script>
+<script>
+  const hamburger = document.getElementById("hamburger");
+  const sidebar = document.getElementById("sidebar");
+  const closeSidebar = document.getElementById("closeSidebar");
+
+  hamburger.onclick = function() {
+    sidebar.style.width = "250px";
+  };
+
+  closeSidebar.onclick = function() {
+    sidebar.style.width = "0";
+  };
+
+  // Optional: Click outside sidebar to close
+  window.onclick = function(event) {
+    if (event.target !== sidebar && event.target !== hamburger) {
+      sidebar.style.width = "0";
+    }
+  };
+</script>
 </body>
 </html>
 

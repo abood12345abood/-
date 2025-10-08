@@ -59,6 +59,7 @@
       font-size: 16px;
       outline: none;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+background: rgba(255,0,0,0,1)
     }
     #searchInput:focus {
       border-color: #ff4081;

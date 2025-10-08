@@ -313,5 +313,48 @@ body.dark-mode #darkModeBtn {
   background: linear-gradient(90deg, #444, #111);
   color: #fff;
 }
+/* Hamburger Icon */
+.hamburger {
+  font-size: 32px;
+  cursor: pointer;
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  z-index: 200;
+}
 
+/* Sidebar Menu */
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 201;
+  top: 0;
+  left: 0;
+  background-color: #1e6c93;
+  overflow-x: hidden;
+  transition: 0.3s;
+  padding-top: 60px;
+}
+
+.sidebar a {
+  padding: 16px 32px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #fff;
+  display: block;
+  transition: 0.2s;
+}
+
+.sidebar a:hover {
+  background: #4dd0e1;
+}
+
+.closebtn {
+  position: absolute;
+  top: 20px;
+  right: 32px;
+  font-size: 36px;
+  cursor: pointer;
+}
 

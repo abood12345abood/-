@@ -331,7 +331,7 @@ body.dark-mode #darkModeBtn {
   z-index: 201;
   top: 0;
   left: 0;
-  background-color: #1e6c93;
+  background: linear-gradient(135deg, #e0f7fa, #84bae5);
   overflow-x: hidden;
   transition: 0.3s;
   padding-top: 60px;
@@ -352,10 +352,9 @@ body.dark-mode #darkModeBtn {
 
 .closebtn {
   position: absolute;
-  top: 20px;
+  top: 50px;
   right: 32px;
   font-size: 36px;
   cursor: pointer;
-  margen-bottom: 10px;
 }
 

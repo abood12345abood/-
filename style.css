@@ -352,9 +352,10 @@ body.dark-mode #darkModeBtn {
 
 .closebtn {
   position: absolute;
-  top: 50px;
+  top: 10px;
   right: 32px;
   font-size: 36px;
   cursor: pointer;
+  margen-bottm: 40px;
 }
 

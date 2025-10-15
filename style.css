@@ -358,4 +358,12 @@ body.dark-mode #darkModeBtn {
   cursor: pointer;
   margen-bottm: 40px;
 }
+.showclass‎ {
+  position: absolute;
+  top: 10px;
+  right: 32px;
+  font-size: 36px;
+  cursor: pointer;
+  margen-bottm: 40px;
+}
 

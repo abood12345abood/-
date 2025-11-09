@@ -4,7 +4,9 @@
   box-sizing: border-box;
   transition: all 0.3s ease;
 }
-
+.header-title{
+font-size: 50%;
+}
 body {
   font-family: "Cairo", sans-serif;
   background: linear-gradient(135deg, #e0f7fa, #84bae5);
